@@ -1,0 +1,14 @@
+# Ignore temporary, sensitive, and environment-specific files
+.env
+__pycache__/
+.vscode/
+.pytest_cache/
+
+# Virtual Environments
+/myenv/
+/venv/
+
+# Temporary installation files
+get-pip.py
+pip-*.tar.gz
+pip-*/

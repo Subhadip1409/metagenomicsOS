@@ -1,0 +1,322 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "metagenomicsos"
+version = "0.1.0"
+description = "AI-powered metagenomics analysis platform with real-time processing and multi-cloud orchestration"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Subhadip Jana", email = "subhadipjana1409@gmail.com" },
+]
+maintainers = [
+    { name = "Subhadip Jana", email = "subhadipjana1409@gmail.com" },
+]
+keywords = [
+    "metagenomics",
+    "bioinformatics",
+    "genomics",
+    "microbiome",
+    "ai",
+    "machine-learning",
+    "workflow-orchestration"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    # Core CLI and configuration
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "click>=8.1.0",
+
+    # Workflow orchestration
+    "snakemake>=8.0.0",
+    "drmaa>=0.7.9",
+
+    # Data processing and analysis
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "scikit-learn>=1.3.0",
+    "biopython>=1.81",
+    "pysam>=0.21.0",
+
+    # Machine Learning and AI
+    "torch>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "joblib>=1.3.0",
+    "optuna>=3.4.0",
+
+    # Streaming and real-time processing
+    "kafka-python>=2.0.2",
+    "watchdog>=3.0.0",
+    "websockets>=11.0.0",
+    "redis>=4.6.0",
+
+    # Web API and UI
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "jinja2>=3.1.0",
+    "httpx>=0.25.0",
+    "websockets>=11.0.0",
+
+    # Database and caching
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.12.0",
+    "psycopg2-binary>=2.9.0",
+    "redis>=4.6.0",
+    "neo4j>=5.13.0",
+
+    # Cloud and container orchestration
+    "boto3>=1.29.0",
+    "google-cloud-storage>=2.10.0",
+    "azure-storage-blob>=12.19.0",
+    "kubernetes>=28.1.0",
+    "docker>=6.1.0",
+
+    # HPC and job scheduling
+    "drmaa>=0.7.9",
+
+    # Visualization and reporting
+    "plotly>=5.17.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "bokeh>=3.3.0",
+    "reportlab>=4.0.0",
+    "openpyxl>=3.1.0",
+
+    # Security and encryption
+    "cryptography>=41.0.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.3.0",
+
+    # Monitoring and observability
+    "prometheus-client>=0.18.0",
+    "opentelemetry-api>=1.21.0",
+    "opentelemetry-sdk>=1.21.0",
+
+    # File handling and compression
+    "h5py>=3.9.0",
+    "zarr>=2.16.0",
+    "lz4>=4.3.0",
+    "zstandard>=0.21.0",
+
+    # Network and async
+    "aiofiles>=23.2.0",
+    "aiohttp>=3.8.0",
+    "asyncio-mqtt>=0.16.0",
+
+    # Configuration and validation
+    "jsonschema>=4.19.0",
+    "cerberus>=1.3.4",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.66.0",
+    "colorama>=0.4.6",
+    "psutil>=5.9.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+# Development dependencies
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-xdist>=3.3.0",
+    "pytest-mock>=3.11.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-workflow>=2.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.6.0",
+    "pre-commit>=3.4.0",
+    "bandit>=1.7.5",
+    "safety>=2.3.0",
+    "coverage>=7.3.0",
+]
+
+# Documentation
+docs = [
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.4.0",
+    "mkdocs-mermaid2-plugin>=1.1.0",
+    "mkdocstrings[python]>=0.23.0",
+    "jupyter>=1.0.0",
+    "nbconvert>=7.9.0",
+]
+
+# Performance and benchmarking
+performance = [
+    "memory-profiler>=0.61.0",
+    "py-spy>=0.3.14",
+    "locust>=2.17.0",
+    "line-profiler>=4.1.0",
+]
+
+# Cloud providers (optional extras)
+aws = [
+    "boto3>=1.29.0",
+    "botocore>=1.32.0",
+    "s3fs>=2023.9.0",
+]
+
+gcp = [
+    "google-cloud-storage>=2.10.0",
+    "google-cloud-batch>=0.17.0",
+    "gcsfs>=2023.9.0",
+]
+
+azure = [
+    "azure-storage-blob>=12.19.0",
+    "azure-batch>=14.0.0",
+    "adlfs>=2023.9.0",
+]
+
+# All optional dependencies
+all = [
+    "metagenomicsos[dev,docs,performance,aws,gcp,azure]"
+]
+
+[project.urls]
+Homepage = "https://github.com/Subhadip1409/metagenomicsOS"
+Documentation = "https://metagenomicsos.readthedocs.io"
+Repository = "https://github.com/Subhadip1409/metagenomicsOS"
+"Bug Tracker" = "https://github.com/Subhadip1409/metagenomicsOS/issues"
+Changelog = "https://github.com/Subhadip1409/metagenomicsOS/blob/main/CHANGELOG.md"
+
+[project.scripts]
+metagenomicsos = "metagenomicsOS.cli.main:app"
+mgos = "metagenomicsOS.cli.main:app"
+
+[project.entry-points."metagenomicsos.plugins"]
+# Built-in plugins
+custom_qc = "metagenomicsOS.plugins.builtin.custom_qc:CustomQCPlugin"
+ml_classifier = "metagenomicsOS.plugins.builtin.ml_classifier:MLClassifierPlugin"
+advanced_binning = "metagenomicsOS.plugins.builtin.advanced_binning:AdvancedBinningPlugin"
+custom_visualization = "metagenomicsOS.plugins.builtin.custom_visualization:CustomVisualizationPlugin"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/metagenomicsOS"]
+
+[tool.hatch.version]
+path = "src/metagenomicsOS/__init__.py"
+
+# Development tools configuration
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["metagenomicsOS"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "drmaa.*",
+    "snakemake.*",
+    "pysam.*",
+    "neo4j.*",
+    "kafka.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--cov=src/metagenomicsOS",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+testpaths = ["tests"]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "e2e: End-to-end tests",
+    "slow: Slow tests",
+    "gpu: Tests requiring GPU",
+    "cloud: Tests requiring cloud resources",
+    "chaos: Chaos engineering tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs"]
+skips = ["B101", "B601"]  # Skip assert_used and shell_injection for test files
