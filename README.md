@@ -11,28 +11,31 @@ MetagenomicsOS is a comprehensive, scalable, and extensible platform designed to
 
 ## Key Features
 
-*   **AI-Powered Analysis:** Leverages machine learning models for advanced tasks like taxonomic classification, functional prediction, and anomaly detection.
-*   **End-to-End Workflow Orchestration:** Uses Snakemake to manage complex, multi-step analysis pipelines, ensuring reproducibility and scalability.
-*   **Real-time Processing:** Ingests and processes data from streaming sources for continuous analysis and monitoring.
-*   **Multi-Cloud & HPC Support:** Provides flexible deployment options across local, HPC (DRMAA), and cloud (AWS, GCP, Azure) environments.
-*   **Extensible Plugin Architecture:** Easily extend the platform's capabilities by developing custom plugins for new tools and analyses.
-*   **Interactive Reporting:** Generates detailed, interactive reports and visualizations using Plotly, Matplotlib, and Bokeh.
+- **AI-Powered Analysis:** Leverages machine learning models for advanced tasks like taxonomic classification, functional prediction, and anomaly detection.
+- **End-to-End Workflow Orchestration:** Uses Snakemake to manage complex, multi-step analysis pipelines, ensuring reproducibility and scalability.
+- **Real-time Processing:** Ingests and processes data from streaming sources for continuous analysis and monitoring.
+- **Multi-Cloud & HPC Support:** Provides flexible deployment options across local, HPC (DRMAA), and cloud (AWS, GCP, Azure) environments.
+- **Extensible Plugin Architecture:** Easily extend the platform's capabilities by developing custom plugins for new tools and analyses.
+- **Interactive Reporting:** Generates detailed, interactive reports and visualizations using Plotly, Matplotlib, and Bokeh.
 
 ## Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/Subhadip1409/metagenomicsOS.git
     cd metagenomicsOS
     ```
 
 2.  **Create and activate a virtual environment:**
+
     ```bash
     python3 -m venv venv
     source venv/bin/activate
     ```
 
 3.  **Install the package:**
+
     ```bash
     # For a standard installation
     pip install .

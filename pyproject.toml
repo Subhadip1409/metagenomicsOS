@@ -7,7 +7,7 @@ name = "metagenomicsos"
 version = "0.1.0"
 description = "AI-powered metagenomics analysis platform with real-time processing and multi-cloud orchestration"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = {text = "MIT"}
 authors = [
     { name = "Subhadip Jana", email = "subhadipjana1409@gmail.com" },
 ]
@@ -35,7 +35,8 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Bio-Informatics",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
+
 
 dependencies = [
     # Core CLI and configuration

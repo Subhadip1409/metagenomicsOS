@@ -1,0 +1,97 @@
+#.github/workflows/ci.yml
+# A clear, human-readable name for the workflow, displayed in the GitHub Actions UI.
+name: CI - Quality and Test Suite
+# Configures the events that trigger this workflow.
+on:
+  # Run on pushes to the main branch.
+  push:
+    branches: [main]
+    # Exclude changes to documentation and other non-code files to conserve resources.
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/ci.yml"
+  # Run on pull requests targeting the main branch.
+  pull_request:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/ci.yml"
+  # Allows manual triggering of the workflow from the GitHub UI for debugging.
+  workflow_dispatch:
+# Sets default permissions for the GITHUB_TOKEN to be read-only.
+# This is a security best practice to prevent a compromised action from modifying the repository.
+permissions:
+  contents: read
+# Configures concurrency to prevent multiple, redundant runs on the same branch.
+concurrency:
+  # Group runs by workflow and branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Automatically cancel any in-progress run in the same group when a new one starts.
+  cancel-in-progress: true
+jobs:
+  # The primary job for running all quality checks and tests.
+  quality-and-tests:
+    # The display name for the job in the GitHub UI.
+    name: Python ${{ matrix.python-version }} - Quality & Tests
+    # The type of machine to run the job on. 'ubuntu-latest' is the standard choice.
+    runs-on: ubuntu-latest
+    # Defines the matrix strategy for multi-version testing.
+    strategy:
+      # If one matrix job fails, the others will continue to run to completion.
+      fail-fast: false
+      matrix:
+        # A list of Python versions to test against.
+        python-version: ["3.9", "3.10", "3.11"]
+    steps:
+      # Step 1: Check out the repository code.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Step 2: Set up the specific Python version for this matrix job.
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      # Step 3: Install uv, the fast Python package installer and resolver.
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      # Step 4: Configure caching for uv dependencies.
+      # This dramatically speeds up builds by avoiding re-downloading packages.
+      - name: Get uv cache directory
+        id: uv-cache-dir
+        run: echo "dir=$(uv cache dir)" >> $GITHUB_OUTPUT
+      - name: Cache uv dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.uv-cache-dir.outputs.dir }}
+          # The cache key is composed of the OS, Python version, and a hash of the lockfile.
+          # The cache is only invalidated when the lockfile changes.
+          key: ${{ runner.os }}-uv-${{ matrix.python-version }}-${{ hashFiles('uv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-uv-${{ matrix.python-version }}-
+      # Step 5: Install project dependencies using the lockfile for reproducibility.
+      - name: Install dependencies
+        run: uv pip sync uv.lock
+      # Step 6: Run the linter to check for code style and quality issues.
+      - name: Run Linter (Ruff)
+        run: |
+          ruff check .
+          ruff format --check .
+      # Step 7: Run the static type checker to find potential type-related bugs.
+      - name: Run Static Type Checker (MyPy)
+        run: mypy src/metagenomicsOS tests
+      # Step 8: Run the unit test suite with code coverage.
+      - name: Run Unit Tests (Pytest)
+        run: pytest tests/unit --cov=src/metagenomicsOS --cov-report=xml
+      # Step 9: Upload the generated coverage report to Codecov.
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Repository secret required
+          files: ./coverage.xml
+          fail_ci_if_error: true

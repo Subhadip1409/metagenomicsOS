@@ -1,35 +1,65 @@
 # Contributing to MetagenomicsOS
 
-Thank you for your interest in contributing to MetagenomicsOS! We welcome all contributions.
+Thank you for your interest in contributing to MetagenomicsOS! This document provides guidelines for contributing to this project.
 
-## How to Contribute
+## Getting Started
 
-*   **Report Bugs:** If you find a bug, please open an issue on our [GitHub issue tracker](https://github.com/Subhadip1409/metagenomicsOS/issues).
-*   **Suggest Features:** Have an idea? Open a feature request issue to start a discussion.
-*   **Write Code:** If you want to contribute code, please follow the development workflow below.
+### Prerequisites
+
+- Python 3.9 or higher
+- uv package manager
+- Git
+
+### Setting Up Development Environment
+
+1. Clone the repository:
+
+git clone https://github.com/Subhadip1409/metagenomicsOS.git
+
+2. Install dependencies:
+
+3. Install pre-commit hooks (we'll set this up tomorrow):
 
 ## Development Workflow
 
-1.  **Fork the repository** and clone it locally.
-2.  **Create a feature branch:** `git checkout -b your-feature-name`
-3.  **Install dependencies.** It's highly recommended to install the `dev` and `pre-commit` dependencies:
-    ```bash
-    pip install -e ".[dev]"
-    pre-commit install
-    ```
-4.  **Make your changes.** Write clean, readable code.
-5.  **Run tests** to ensure your changes don't break anything: `pytest`
-6.  **Commit your changes** with a descriptive message. The pre-commit hooks will automatically format and lint your code.
-7.  **Push your branch** to your fork.
-8.  **Open a Pull Request** to the main repository.
+### Branching Strategy
+
+- `main` - stable, production-ready code
+- `develop` - integration branch for features
+- `feature/feature-name` - individual features
+- `bugfix/issue-description` - bug fixes
+
+### Making Changes
+
+1. Create a feature branch:
+   git checkout -b feature/your-feature-name
+
+2. Make your changes and write tests
+3. Run tests to ensure everything works:
+
+4. Commit your changes with a descriptive message:
+   git commit -m "feat: add new feature description"
+
+### Pull Request Process
+
+1. Push your branch to GitHub
+2. Create a Pull Request with:
+
+- Clear title and description
+- Link to any related issues
+- Screenshots if UI changes are involved
+
+3. Ensure all CI checks pass
+4. Wait for code review and address feedback
 
 ## Coding Standards
 
-We use the following tools to maintain code quality. The pre-commit hooks will manage these for you.
+- Follow PEP 8 Python style guidelines
+- Use type hints for all function parameters and return values
+- Write docstrings for all public functions and classes
+- Keep functions small and focused
+- Write tests for new features
 
-*   **Formatter:** `black`
-*   **Import Sorter:** `isort`
-*   **Linter:** `flake8`
-*   **Type Checker:** `mypy`
+## Questions?
 
-We look forward to your contributions!
+Feel free to open an issue for questions or join our discussions!
