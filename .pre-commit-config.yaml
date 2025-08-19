@@ -1,59 +1,97 @@
+# Pre-commit hooks configuration for MetagenomicsOS
+# Keeps hooks under 5 seconds for fast commits
 repos:
-  # Basic file hygiene
+  # Basic file hygiene and safety checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
       - id: trailing-whitespace
+        description: Removes trailing whitespace
       - id: end-of-file-fixer
+        description: Ensures files end with newline
       - id: check-yaml
+        description: Validates YAML syntax
         args: [--allow-multiple-documents]
       - id: check-toml
+        description: Validates TOML syntax (for pyproject.toml)
       - id: check-json
+        description: Validates JSON syntax
       - id: check-added-large-files
+        description: Prevents large files from being committed
         args: [--maxkb=1000]
       - id: check-merge-conflict
+        description: Checks for merge conflict markers
       - id: debug-statements
+        description: Checks for debugger imports and breakpoints
       - id: check-executables-have-shebangs
+        description: Ensures executables have shebangs
 
-  # Python formatting
+  # Python code formatting with Black
   - repo: https://github.com/psf/black
     rev: 24.1.1
     hooks:
       - id: black
+        description: Python code formatter
         language_version: python3
-        args: [--line-length=88, --target-version=py311]
+        args: [--line-length=88, --target-version=py39]
 
-  # Fast linting with Ruff
+  # Fast Python linting with Ruff (replaces flake8, isort, and more)
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.15
     hooks:
       - id: ruff
-        args: [--fix, --exit-zero]
+        description: Fast Python linter and formatter
+        args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
+        description: Fast Python formatter (alternative to black)
 
-  # Type checking
+  # Type checking with MyPy
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.8.0
     hooks:
       - id: mypy
+        description: Python type checker
+        additional_dependencies:
+          - types-requests
+          - types-PyYAML
+          - types-setuptools
         args: [--ignore-missing-imports, --no-strict-optional]
         exclude: ^(tests/|docs/|scripts/)
 
-  # Security scanning (FIXED)
+  # Security scanning
   - repo: https://github.com/PyCQA/bandit
     rev: 1.7.5
     hooks:
       - id: bandit
+        description: Security linter for Python code
+        language_version: python3
         args: ["-r", "src/tests/,docs/,venv/"] # Only scan src directory
         additional_dependencies: ["bandit[toml]"]
 
-  # Documentation style (FIXED)
+  # Documentation and comments
   - repo: https://github.com/pycqa/pydocstyle
     rev: 6.3.0
     hooks:
       - id: pydocstyle
+        description: Python docstring style checker
+        language_version: python3
+        additional_dependencies: ["pydocstyle[google]"]
         args: ["--convention=google", "--add-ignore=D100,D101,D102,D103,D104"]
 
-# Global settings
+# Global configuration
+default_stages: [pre-commit, pre-push]
 fail_fast: false
 minimum_pre_commit_version: "3.0.0"
+
+# CI configuration (optional)
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ""
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
