@@ -1,0 +1,71 @@
+name: ❓ Question
+description: Ask a question about MetagenomicsOS usage or functionality
+title: "[QUESTION] "
+labels: ["question", "documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about using MetagenomicsOS? We're here to help!
+
+        **Before asking**: Please check our [documentation](../docs/) and existing issues.
+
+  - type: dropdown
+    id: question-category
+    attributes:
+      label: Question Category
+      description: What area is your question about?
+      options:
+        - Installation & Setup
+        - Configuration
+        - Running Analysis
+        - Interpreting Results
+        - Performance & Optimization
+        - Integration with Other Tools
+        - Best Practices
+        - Troubleshooting
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question-details
+    attributes:
+      label: Question Details
+      description: Please provide your question with as much context as possible
+      placeholder: |
+        I'm trying to run a comparative analysis between two sample groups, but I'm not sure:
+        1. How to structure my metadata file
+        2. Which analysis parameters to use
+        3. How to interpret the statistical output
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context & Background
+      description: |
+        Help us understand your use case:
+        - What are you trying to achieve?
+        - What have you tried so far?
+        - What specific part is unclear?
+      placeholder: |
+        I have 20 samples from two treatment groups (10 controls, 10 treated).
+        I want to find differentially abundant taxa between groups.
+        I've successfully run QC and taxonomic classification, but I'm stuck on the comparative analysis step.
+
+  - type: textarea
+    id: current-approach
+    attributes:
+      label: Current Approach (if any)
+      description: Show us what you've tried or your current workflow
+      placeholder: |
+        ```
+        # What I've done so far:
+        metagenomicsOS run qc --input samples/
+        metagenomicsOS run taxonomy --input results/qc/
+
+        # What I'm trying to do:
+        metagenomicsOS run comparative --help  # This is where I'm stuck
+        ```

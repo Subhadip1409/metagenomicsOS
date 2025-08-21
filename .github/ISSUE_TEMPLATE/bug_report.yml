@@ -1,0 +1,160 @@
+name: 🐛 Bug Report
+description: Report a bug to help us improve MetagenomicsOS
+title: "[BUG] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out the sections below to help us reproduce and fix the issue.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm you have completed these steps
+      options:
+        - label: I have searched existing issues to ensure this bug hasn't been reported
+          required: true
+        - label: I am using the latest version of MetagenomicsOS
+          required: true
+        - label: I have read the documentation
+          required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug Summary
+      description: A clear and concise description of what the bug is
+      placeholder: "Example: FastQC analysis fails when processing paired-end reads larger than 2GB"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: "FastQC should process large paired-end files successfully and generate quality reports"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happens?
+      placeholder: "Process crashes with 'Memory allocation failed' error after processing ~1.5GB"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        **REQUIRED**: Provide detailed, step-by-step instructions to reproduce the bug.
+        Include exact commands, file paths, and configuration settings.
+      placeholder: |
+        1. Install MetagenomicsOS v0.1.0
+        2. Create config file with: `metagenomicsOS config init`
+        3. Run command: `metagenomicsOS run qc --input large_sample_R1.fastq.gz --input large_sample_R2.fastq.gz`
+        4. Observe error after ~10 minutes of processing
+      value: |
+        1.
+        2.
+        3.
+        4.
+    validations:
+      required: true
+
+  - type: textarea
+    id: minimal-example
+    attributes:
+      label: Minimal Reproducible Example
+      description: |
+        **REQUIRED**: Provide the smallest possible example that reproduces the issue.
+        Include sample data, commands, and configuration files.
+      placeholder: |
+        ```
+        # Sample command that triggers the bug
+        metagenomicsOS run qc --input test_R1.fastq.gz --memory 4GB
+
+        # Config file content (if relevant)
+        databases:
+          kraken2_db: "/path/to/db"
+        workflows:
+          qc:
+            memory_limit: "4GB"
+        ```
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment-os
+    attributes:
+      label: Operating System
+      description: What operating system are you using?
+      options:
+        - Ubuntu 20.04
+        - Ubuntu 22.04
+        - CentOS 7
+        - CentOS 8
+        - macOS Intel
+        - macOS Apple Silicon
+        - Windows 10
+        - Windows 11
+        - Other (specify in additional context)
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      description: Output of `python --version`
+      placeholder: "Python 3.9.7"
+    validations:
+      required: true
+
+  - type: input
+    id: metagenomics-version
+    attributes:
+      label: MetagenomicsOS Version
+      description: Output of `metagenomicsOS --version`
+      placeholder: "v0.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Messages and Logs
+      description: |
+        **REQUIRED**: Paste the complete error message and relevant log output.
+        Use triple backticks to format code blocks.
+      placeholder: |
+        ```
+        Traceback (most recent call last):
+          File "/usr/local/bin/metagenomicsOS", line 8, in <module>
+            sys.exit(main())
+        MemoryError: Unable to allocate 8.00 GiB for an array with shape (1073741824,) and data type float64
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Any other context about the problem here. Include:
+        - Hardware specs (RAM, CPU)
+        - Docker/container usage
+        - HPC/cluster environment details
+        - Sample file sizes and formats
+      placeholder: |
+        - Hardware: 16GB RAM, 8 CPU cores
+        - Running in Docker container
+        - Sample files: 2.1GB and 2.3GB paired-end FASTQ files
+        - Error occurs consistently with files >2GB

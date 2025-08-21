@@ -1,0 +1,118 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for MetagenomicsOS
+title: "[FEATURE] "
+labels: ["enhancement", "needs-discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature! Please provide details to help us understand and evaluate your request.
+
+  - type: checkboxes
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: Please confirm you have completed these steps
+      options:
+        - label: I have searched existing issues to ensure this feature hasn't been requested
+          required: true
+        - label: I have checked the project roadmap and documentation
+          required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What use case does it address?
+      placeholder: "Currently, users cannot analyze time-series metagenomics data because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your ideal solution in detail
+      placeholder: |
+        I propose adding a `temporal-analysis` module that would:
+        1. Accept time-series sample metadata
+        2. Track taxonomic changes over time
+        3. Generate time-series visualizations
+        4. Export results in standard formats
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: Describe how a user would interact with this feature
+      placeholder: |
+        As a researcher studying gut microbiome dynamics:
+        1. I would run: `metagenomicsOS temporal --input samples/ --metadata timeline.csv`
+        2. The system would detect temporal relationships in my data
+        3. I would receive interactive plots and statistical summaries
+        4. I could export results for publication
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - Analysis Pipeline
+        - Visualization
+        - Data Export/Import
+        - Performance Optimization
+        - User Interface
+        - Documentation
+        - Integration (APIs, databases)
+        - Quality Control
+        - Machine Learning
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority-level
+    attributes:
+      label: Priority Level
+      description: How important is this feature to your workflow?
+      options:
+        - Critical (blocks current work)
+        - High (significantly improves workflow)
+        - Medium (nice to have improvement)
+        - Low (minor enhancement)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: What workarounds or alternative approaches have you considered?
+      placeholder: "Currently I use R/Python scripts, but this requires manual data formatting and..."
+
+  - type: textarea
+    id: implementation-ideas
+    attributes:
+      label: Implementation Ideas
+      description: |
+        (Optional) Do you have ideas about how this could be implemented?
+        Include relevant libraries, algorithms, or technical approaches.
+      placeholder: |
+        - Could use the `longitudinal` Python package for time-series analysis
+        - Integration with Plotly for interactive visualizations
+        - SQLite database for efficient temporal data storage
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Any other information that would help us understand this feature request:
+        - Links to relevant papers or tools
+        - Example data or use cases
+        - Screenshots or mockups
