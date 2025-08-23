@@ -1,0 +1,17 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "metagenomics_db",
+    "user": "postgres"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "metagenomics.log"
+  },
+  "analysis": {
+    "threads": 4,
+    "memory_limit": "8GB",
+    "output_dir": "./results"
+  }
+}
