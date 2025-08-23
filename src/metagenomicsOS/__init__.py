@@ -5,18 +5,23 @@ real-time processing, and multi-platform deployment capabilities.
 """
 
 __version__ = "0.1.0"
-__author__ = "Your Name"
-__email__ = "your.email@example.com"
+__author__ = "Subhadip Jana"
+__email__ = "subhadipjana1409@gmail.com"
 __description__ = "Production-grade metagenomics analysis platform"
 
 # Import core components for easy access
-from .core.config_manager import ConfigManager, MetagenomicsConfig
+from .core.config_manager import ConfigManager
+from .core.exceptions import (
+    MetagenomicsOSError,
+    ConfigurationError,
+    DatabaseError,
+    WorkflowError,
+)
 
-# Package metadata
 __all__ = [
-    "__version__",
-    "__author__",
-    "__email__",
     "ConfigManager",
-    "MetagenomicsConfig",
+    "MetagenomicsOSError",
+    "ConfigurationError",
+    "DatabaseError",
+    "WorkflowError",
 ]

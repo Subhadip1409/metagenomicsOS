@@ -381,3 +381,27 @@ dry_run: false          # Show commands without execution
         else:
             # For JSON, save normally
             self.save_config(output_path, config)
+
+    def get_all_config(self) -> Dict[str, Any]:
+        """Get all configuration settings as a dictionary."""
+        if not self._config:
+            self.load_config()
+        return dict(self._config.model_dump()) if self._config else {}
+
+    def set_config(self, key: str, value: Any) -> None:
+        """Set a configuration value."""
+        if not self._config:
+            self.load_config()
+        if self._config:
+            # This is a simplified approach. A more robust implementation
+            # would handle nested keys.
+            if hasattr(self._config, key):
+                setattr(self._config, key, value)
+                self.save_config(self.config_path or self.get_default_config_path())
+            else:
+                raise KeyError(f"Invalid configuration key: {key}")
+
+    def reset_to_defaults(self) -> None:
+        """Reset the configuration to default values."""
+        self._config = MetagenomicsConfig()
+        self.save_config(self.config_path or self.get_default_config_path())

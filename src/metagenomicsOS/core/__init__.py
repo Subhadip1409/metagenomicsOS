@@ -1,12 +1,6 @@
-"""Core functionality for MetagenomicsOS.
+"""MetagenomicsOS Core Modules.
 
-This module contains the fundamental components including configuration management,
-data models, workflow engines, and other essential system components.
+Business logic separated from CLI interface.
 """
 
-from .config_manager import ConfigManager, MetagenomicsConfig
-
-__all__ = [
-    "ConfigManager",
-    "MetagenomicsConfig",
-]
+__version__ = "0.1.0"
