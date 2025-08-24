@@ -65,8 +65,9 @@ repos:
       - id: bandit
         description: Security linter for Python code
         language_version: python3
-        args: ["-r", "src/tests/,docs/,venv/"] # Only scan src directory
+        args: ["-r", "src/", "--exclude", "tests/"] # Only scan src directory, exclude tests
         additional_dependencies: ["bandit[toml]"]
+        pass_filenames: false
 
   # Documentation and comments
   - repo: https://github.com/pycqa/pydocstyle

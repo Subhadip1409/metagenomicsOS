@@ -1,0 +1,9 @@
+project:
+  name: metagenomicsos
+databases:
+  kraken2:
+    path: "/abs/path/to/kraken2_db" # required if taxonomy enabled
+# turn off taxonomy if no DB yet:
+# workflows:
+#   toggles:
+#     taxonomy: false

@@ -1,6 +1,52 @@
-"""MetagenomicsOS Core Modules.
+# src/metagenomicsOS/core/__init__.py
 
-Business logic separated from CLI interface.
-"""
+# Re-export key models for convenience
+from .data_models import (
+    Config,
+    ProjectConfig,
+    PathsConfig,
+    LoggingConfig,
+    CacheConfig,
+    DatabasesConfig,
+    DatabaseEntry,
+    ExecutionProfile,
+    LocalSettings,
+    SlurmSettings,
+    AWSBatchSettings,
+    GCPSettings,
+    RetryPolicy,
+    ContainerConfig,
+    SamplesConfig,
+    WorkflowsConfig,
+    WorkflowToggles,
+    QCParams,
+    TaxonomyParams,
+    FunctionParams,
+    AssemblyParams,
+    BinningParams,
+)
 
-__version__ = "0.1.0"
+__all__ = [
+    "Config",
+    "ProjectConfig",
+    "PathsConfig",
+    "LoggingConfig",
+    "CacheConfig",
+    "DatabasesConfig",
+    "DatabaseEntry",
+    "ExecutionProfile",
+    "LocalSettings",
+    "SlurmSettings",
+    "AWSBatchSettings",
+    "GCPSettings",
+    "RetryPolicy",
+    "ContainerConfig",
+    "SamplesConfig",
+    "WorkflowsConfig",
+    "WorkflowToggles",
+    "QCParams",
+    "TaxonomyParams",
+    "FunctionParams",
+    "AssemblyParams",
+    "BinningParams",
+]
