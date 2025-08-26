@@ -1,7 +1,7 @@
 # cli/commands/benchmark.py
 from __future__ import annotations
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Any, TypedDict
 import json
 import time
 from datetime import datetime
@@ -13,6 +13,23 @@ app = typer.Typer(help="Performance benchmarking")
 
 BenchmarkType = Literal["workflow", "scaling", "memory", "io", "cpu"]
 DataSize = Literal["small", "medium", "large", "xlarge"]
+
+
+class MockBenchmarkData(TypedDict):
+    avg_runtime_seconds: float
+    avg_runtime: str
+    peak_memory: str
+    cpu_efficiency: int
+    workflow: str
+
+
+class BenchmarkSummary(TypedDict):
+    name: str
+    file: str
+    runtime: str
+    runtime_seconds: float
+    memory: str
+    cpu_efficiency: int
 
 
 @app.command("workflow")
@@ -422,11 +439,11 @@ def compare_benchmarks(
 
 def _compare_benchmark_results(benchmark_files: list[Path], metric: str) -> dict:
     """Compare benchmark results across multiple files."""
-    summaries = []
+    summaries: list[BenchmarkSummary] = []
 
     for i, file_path in enumerate(benchmark_files):
         # Mock loading benchmark data
-        mock_data = {
+        mock_data: MockBenchmarkData = {
             "avg_runtime_seconds": 1800 + i * 300,
             "avg_runtime": f"{(1800 + i * 300) // 60:02d}:{(1800 + i * 300) % 60:02d}",
             "peak_memory": f"{12 + i * 2}GB",
@@ -434,7 +451,7 @@ def _compare_benchmark_results(benchmark_files: list[Path], metric: str) -> dict
             "workflow": "assembly",
         }
 
-        summary = {
+        summary: BenchmarkSummary = {
             "name": file_path.stem,
             "file": str(file_path),
             "runtime": mock_data["avg_runtime"],
