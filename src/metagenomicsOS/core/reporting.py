@@ -86,8 +86,8 @@ class ReportGenerator:
             <h1>🧬 MetagenomicsOS Analysis Report</h1>
             <div class="summary">
                 <h2>Summary</h2>
-                <p><strong>Input Directory:</strong> {data['input_directory']}</p>
-                <p><strong>Total Analysis Files:</strong> {data['summary']['total_files']}</p>
+                <p><strong>Input Directory:</strong> {data["input_directory"]}</p>
+                <p><strong>Total Analysis Files:</strong> {data["summary"]["total_files"]}</p>
             </div>
             <h2>Analysis Files</h2>
             <ul>

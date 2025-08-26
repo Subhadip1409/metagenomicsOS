@@ -1,4 +1,4 @@
-# metagenomicsOS/cli/__init__.py
-from .commands.config import config
+# cli/__init__.py
+from typing import List
 
-__all__ = ["config"]
+__all__: List[str] = []
