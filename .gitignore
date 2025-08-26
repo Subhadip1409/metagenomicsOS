@@ -3,11 +3,14 @@
 __pycache__/
 .vscode/
 .pytest_cache/
-
+.ruff_cache/
+.myoy_cache/
 # Virtual Environments
 /myenv/
 /venv/
-
+.venv/
+.venv2/
+.venv311/
 # Temporary installation files
 get-pip.py
 pip-*.tar.gz
