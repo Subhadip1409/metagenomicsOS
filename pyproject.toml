@@ -3,7 +3,7 @@ requires = ["hatchling", "setuptools", "cython"]
 build-backend = "hatchling.build"
 
 [project]
-name = "metagenomicsos"
+name = "metagenomicsOS"
 version = "0.1.0"
 description = "AI-powered metagenomics analysis platform with real-time processing and multi-cloud orchestration"
 readme = "README.md"
@@ -186,7 +186,7 @@ cli = [
 ]
 
 all = [
-  "metagenomicsos[dev,docs,performance,aws,gcp,azure,cli]"
+  "metagenomicsOS[dev,docs,performance,aws,gcp,azure,cli]"
 ]
 
 [project.urls]
@@ -200,7 +200,7 @@ Changelog     = "https://github.com/Subhadip1409/metagenomicsOS/blob/main/CHANGE
 metagenomicsOS    = "metagenomicsOS.cli.main:app"
 mgOS               = "metagenomicsOS.cli.main:app"
 
-[project.entry-points."metagenomicsos.plugins"]
+[project.entry-points."metagenomicsOS.plugins"]
 custom_qc           = "metagenomicsOS.plugins.builtin.custom_qc:CustomQCPlugin"
 ml_classifier       = "metagenomicsOS.plugins.builtin.ml_classifier:MLClassifierPlugin"
 advanced_binning    = "metagenomicsOS.plugins.builtin.advanced_binning:AdvancedBinningPlugin"
@@ -269,7 +269,8 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts    = [
+
+addopts = [
   "-ra",
   "--strict-markers",
   "--strict-config",
@@ -277,17 +278,22 @@ addopts    = [
   "--cov-report=term-missing",
   "--cov-report=html",
   "--cov-report=xml",
+  "-v",
+  "--tb=short"
 ]
-testpaths  = ["tests"]
-markers    = [
+
+testpaths  = ["src/tests"]
+
+markers = [
   "unit: Unit tests",
   "integration: Integration tests",
   "e2e: End-to-end tests",
   "slow: Slow tests",
   "gpu: Tests requiring GPU",
   "cloud: Tests requiring cloud resources",
-  "chaos: Chaos engineering tests",
+  "chaos: Chaos engineering tests"
 ]
+
 
 [tool.coverage.run]
 source = ["src"]
